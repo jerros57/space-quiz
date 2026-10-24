@@ -2,9 +2,9 @@
 
 ## Project structure and architecture
 
-- The project is a standalone Spanish-language quiz with no build system or runtime dependencies. `index.html` contains the semantic page markup and loads `styles.css` and `script.js`.
-- `styles.css` owns the responsive layout, galaxy backdrop, motion preferences, and theme tokens. CSS custom properties in `:root` define the light theme; `@media (prefers-color-scheme: dark)` overrides them for dark mode.
-- `script.js` owns the question data, mission and practice-round state, score/progress updates, and result rendering. The page has three UI states in one mission card: start, quiz, and results.
+- The project is a standalone Spanish-language quiz implemented in `index.html`, including the markup, styles, question data, and application logic. It has no build system or runtime dependencies.
+- The page has three UI states in one mission card: start, quiz, and results. The inline script owns question progression, shuffled answer order, mission/practice-round state, score/progress updates, and result rendering.
+- CSS custom properties in `:root` define the light theme; `@media (prefers-color-scheme: dark)` overrides them for dark mode. The responsive layout, galaxy backdrop, and reduced-motion handling are CSS-only.
 
 ## Build, test, and lint
 
@@ -14,7 +14,7 @@
 
 ## Codebase conventions
 
-- Keep markup in `index.html`, styles in `styles.css`, and quiz data/behavior in `script.js`; avoid adding dependencies or a build step for this standalone app.
+- Keep changes self-contained in `index.html`; avoid adding dependencies or a build step for this standalone app.
 - User-facing copy and quiz content are in Spanish. Questions use `{ category, question, answers, correct, fact }`; `correct` is a zero-based index into `answers`.
 - If the question count changes, keep the start-screen summary, displayed total, progress-bar maximum, and results denominator consistent with `questions.length`; prefer deriving these values from the array to avoid mismatches.
 - Keep generated answer text as text (DOM `textContent`) and construct answer controls with DOM APIs rather than interpolating quiz content into HTML.
